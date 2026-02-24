@@ -1,0 +1,44 @@
+CREATE TABLE user9 (
+id INT,
+age INT,
+name VARCHAR(30) NOT NULL,
+email VARCHAR(50) UNIQUE,
+followers INT DEFAULT 0,
+following INT,
+CONSTRAINT user9_age_check CHECK (age >= 13),
+PRIMARY KEY (id)
+);
+
+INSERT INTO user9
+(id, age, name, email, followers, following)
+VALUES
+(1, 14, "adam", "adam@yahoo.in", 123, 145),
+(2, 15, "bob", "bob123@gmail.com", 200, 200),
+(3, 16, "casey", "casey@email.com", 300, 306),
+(4, 17, "donald", "donald@gmail.com", 200, 105);
+
+ALTER TABLE user9
+ADD COLUMN city VARCHAR(25) DEFAULT"Delhi";
+
+ALTER TABLE user9
+DROP COLUMN email;
+
+ALTER TABLE user9
+RENAME TO instauser;
+
+ALTER TABLE instauser
+CHANGE COLUMN followers subs INT DEFAULT 0;
+
+ALTER TABLE instauser
+MODIFY subs INT DEFAULT 5;
+
+SELECT * FROM instauser;
+
+TRUNCATE TABLE instauser;
+DROP TABLE post9;
+CREATE TABLE post9 (
+id INT PRIMARY KEY,
+content VARCHAR(100),
+user9_id INT,
+FOREIGN KEY (user9_id) REFERENCES user9(id)
+);
